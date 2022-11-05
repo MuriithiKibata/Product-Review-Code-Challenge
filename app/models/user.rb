@@ -3,15 +3,10 @@ class User < ActiveRecord::Base
     has_many :reviews
     has_many :products, through: :reviews
 
-    def review
-        self.reviews
-    end
-    def user
-        self.users
-    end
+    
 
     def favorite_product
-        self.reviews.order(:star_rating).last
+        self.reviews.order(:star_rating).last.product
     end
 
     def remove_reviews(product)

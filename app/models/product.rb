@@ -1,22 +1,13 @@
 class Product < ActiveRecord::Base
-    # has_many :users, through: :reviews
     has_many :reviews
     has_many :users, through: :reviews
-#     `Product#reviews`
-#   - returns a collection of all the Reviews for the Product
-# - `Product#users`
-#   - returns a collection of all the Users who reviewed the Product
-def review
-    self.reviews
-end
-def user
-    self.users
-end
+
+
 def leave_review(user, star_rating, comment)
- Review.create(star_rating: star_rating, comment: comment)
+ Review.create(star_rating: star_rating, comment: comment, user_id: user.id, product_id: product.id)
 end
 def print_all_reviews
-     self.reviews.each {|review| review.print_review}
+     self.reviews.collect{|review| "Review for #{review.product.name} by #{review.user.name}: #{review.star_rating}. #{review.comment}"}
 end
 
 def average_rating
