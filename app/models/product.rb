@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
 
 
 def leave_review(user, star_rating, comment)
- Review.create(star_rating: star_rating, comment: comment, user_id: user.id, product_id: product.id)
+ Review.create(star_rating: star_rating, comment: comment, user_id: user.id, product_id: self.id)
 end
 def print_all_reviews
      self.reviews.collect{|review| "Review for #{review.product.name} by #{review.user.name}: #{review.star_rating}. #{review.comment}"}
